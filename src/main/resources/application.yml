@@ -1,0 +1,28 @@
+server:
+  port: 8082
+
+spring:
+  application:
+  name: spring-oauth-client
+  output.ansi.enabled: ALWAYS
+  security:
+    oauth2:
+      client:
+        provider:
+          spring:
+            issuer-uri: http://127.0.0.1:8080 #Authorization server
+        registration:
+          reg-client:
+            provider: spring #You can use Google provider or any other provider out there :)
+            client-id: demo
+            client-secret: "secret"
+            authorization-grant-type: authorization_code
+            client-authenticated-method: client_secret_basic
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: user.read,openid
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
